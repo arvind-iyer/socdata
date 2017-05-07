@@ -1,0 +1,10 @@
+{
+  "name": "socdata",
+  "version": "0.0.0",
+  "dependencies": {
+    "d3": "^3.5.16",
+    "calendar-heatmap": "DKirwan/calendar-heatmap#^0.4.1"
+  },
+  "devDependencies": {},
+  "directory": "app/bower_components"
+}

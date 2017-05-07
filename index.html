@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Assignment 2</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+
+    <!-- <link rel="stylesheet" type="text/css" href="src/bootstrap/css/bootstrap.css"> -->
+    <link rel="stylesheet" type="text/css" href="src/css/project.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="//d3js.org/topojson.v1.min.js"></script>
+   <!--  <script type="text/javascript" src="src/bootstrap/js/bootstrap.js"></script> -->
+    <script src="d3.js"></script>
+</head>
+
+<body>
+    <!------------------------------------------------------ Container For all Views ------------------------------------------------->
+  <!--  <div class="parallax"> -->
+    <div class="container">
+        <!----------------------------------------------------------- Project part 1 -------------------------------------------------------------->
+        <div id="parallax-curtain">
+            <h2 align="center"><strong>Assignment 2A: One scatter plot and two datasets</strong></h2>
+            <div class="container" id="vis1" align="center">
+                <p align="left">Each point corresponds to as different police department district in San Francisco.
+                By mousing over the different points the tooltip label will display its name and values.
+                    <br> The plot is organised with the X axis of each point corresponding to the number of
+                    <b><i>Prostitution</i></b> crimes in that district, while the Y value corresponds to the number of <b><i>Vehicle Thefts</i></b> crimes.
+                    The area of each point corresponds to the total recorded crime for that district.</p>
+                <h2 id="year">Showing Data for 2003</h2>
+                <p>Press Anywhere on the Chart to Toggle Years</p>
+            </div>
+            <div>
+            <p><b>Explain in your own words why you think I want the axes to be the same for both years?</b><br>
+                By keeping the scale the same for both years it is easy to see the comparison between the crime value for the two years.
+                Prostitution and Vehicle Thefts were both higher in 2003, when switching to 2015 because the scale has been kept the same this drop in crime can
+                be visualised by the points moving down both the X and Y axis. If the axis had been rescaled the new axis values would ensure that the new data points
+                filled as much of the graph as possible and so this visualisation of the movement of the crime points to a lower level would have been lost.
+            </p>
+            </div>
+            <div id="tooltip" class="hidden">
+            </div>
+        <!--------------------------------------------------------- Project part 2  ---------------------------------------------- -->
+            <h2 align="center"><strong>Assignment 2B: Visualizing Geodata</strong></h2>
+            <p align="left">Each point corresponds to a recorded <b><i>Prostitution</i></b> crime. A K-means clustering algorithm
+            is used to determine the cluster centers for Prostitution crime. Different values of K are tried form 2-6. Displayed below
+            is a map of the city showing the different police districts with the prostitution crime points overlayed. The colour of the points
+            correspond to the cluster center for that area denoted by a bigger circle of the same colour outlined in black. The value of
+            K can be changed by pressing on one of the 5 buttons K2-K6. A preview is displayed when hovering over the button. When hovering over
+            a point on the map, its Lat and Lon will be displayed.
+                <!-- <div class="btn col-xs-12 col-sm-12 col-md-12" align="center">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary button" id="k2">Click k2</button>
+                        <button type="button" class="btn btn-primary button" id="k3">Click k3</button>
+                        <button type="button" class="btn btn-primary button" id="k4">Click k4</button>
+                        <button type="button" class="btn btn-primary button" id="k5">Click k5</button>
+                        <button type="button" class="btn btn-primary button" id="k6">Click k6</button>
+                    </div>
+                </div> --> 
+                <div class="row">
+                    <div class="col-xs-3 col-md-3">
+                        <!-- <img id="pics" style.visibility="false" class="image" width="100%" height="100%" src="minPics/k2.PNG" /> -->
+                        <div id="tooltip2" class="hidden">
+                        </div>
+                    </div>
+                    <div class="col-xs-9 col-sm-9 col-md-9" id="vis2" align="center">
+                        <div id="minus"></div>
+                        <div id="plus"></div>
+                    </div>
+                </div>
+            </div>
+        <script type="text/javascript" src="src/js/project.js"></script>
+    <!--</div>-->
+</body>
+</html>

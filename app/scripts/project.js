@@ -3,7 +3,7 @@ var w2 = 600;
 var h = 500;
 var scale = ((w2-1) / 2 / Math.PI)
 var rScale;
-var color2 = ['pink', 'Brown', 'Red', 'Orange','Yellow', 'Green', 'Blue', 'Violet', 'Grey','black' ];
+var color2 = ['#ff0066', '#ff4000', '#008000', '#527a7a','Yellow', '#009933', '#ff0000', '#660000', '#002db3','black' ];
 
 
 //Define map projection
@@ -57,8 +57,7 @@ function bind() {
             .enter()
             .append("path")
             .attr("d", path)
-            .style("fill", 'steelblue')
-            .style( "opacity", 0.5)
+            .style("fill", '#c2c2d6')
             .attr("stroke", "black")
 
             //Bind data and create one path per GeoJSON feature
@@ -67,8 +66,7 @@ function bind() {
               .enter()
               .append("path")
               .attr("d", path)
-              .style("fill", 'steelblue')
-              .style( "opacity", 0.5)
+              .style("fill", '#c2c2d6')
               .attr("stroke", "black")
 
             //Bind data and create one path per GeoJSON feature
@@ -77,8 +75,7 @@ function bind() {
                 .enter()
                 .append("path")
                 .attr("d", path)
-                .style("fill", 'steelblue')
-                .style( "opacity", 0.5)
+                .style("fill", '#c2c2d6')
                 .attr("stroke", "black")
 
         //Bind data and create one path per GeoJSON feature
@@ -325,7 +322,7 @@ d3.selectAll(".spf")
 							}else if(upSpf == 'spf2'){
 								return 'red'
 							}else if(upSpf == 'spf3'){
-								return 'pink'
+								return 'orange'
 							}else if(upSpf == 'spf4'){
 								return 'brown'
 							}else if(upSpf == 'spf5'){

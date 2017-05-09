@@ -5,11 +5,13 @@ var csvData;
 function plotChart(data) {
     var w = 400;
     var h = 250, H = 300;
+    var keys = ["Food", "Sanitation", "Neighbourhood", "Noise", "Homeless"];
     var values = [];
-    for(var i = 1, vals = Object.values(data);
-        i < vals.length; i++) {
-        values.push(parseInt(vals[i]));
+    for(var key in keys) {
+        values.push(parseInt(data[keys[key]]));
     }
+    console.log("keys", keys, values);
+
     var xScale = d3.scale.ordinal()
         .domain(d3.range(values.length))
         .rangeRoundBands([0, w], 0.1);
@@ -44,13 +46,13 @@ function plotChart(data) {
         .enter()
         .append("text")
         .attr("x", function(d, i){
-            return xScale(i) + (13 - Object.keys(data)[i+1].length)* 2;
+            return xScale(i) + (13 - keys[i].length)* 2;
         })
         .attr("y", function(d) {
             return h + 20;
         })
         .text(function(d,i) {
-            return Object.keys(data)[i+1];
+            return keys[i];
         })
         .attr("font-size", 12)
         .attr("font-family", "Open Sans");

@@ -2,6 +2,9 @@
 var w2 = 600;
 var h = 500;
 var scale = ((w2-1) / 2 / Math.PI)
+var rScale;
+var color2 = ['pink', 'Brown', 'Red', 'Orange','Yellow', 'Green', 'Blue', 'Violet', 'Grey','black' ];
+
 
 //Define map projection
 var projection = d3.geo.mercator()
@@ -13,7 +16,28 @@ var path = d3.geo.path()
             .projection(projection);
 
 //Create SVG element
+var svg1 = d3.select("#vis1")
+.append("svg")
+.attr("width", w2)
+.attr("height", h)
+.append("g");
+
+//Create SVG element
 var svg2 = d3.select("#vis2")
+.append("svg")
+.attr("width", w2)
+.attr("height", h)
+.append("g");
+
+//Create SVG element
+var svg4 = d3.select("#vis4")
+.append("svg")
+.attr("width", 800)
+.attr("height", h)
+.append("g");
+
+//Create SVG element
+var svg5 = d3.select("#vis5")
 .append("svg")
 .attr("width", w2)
 .attr("height", h)
@@ -28,7 +52,37 @@ function bind() {
     d3.json("res/data/nyc.geojson", function(json) {
 
         //Bind data and create one path per GeoJSON feature
-        svg2.selectAll("path")
+        svg1.selectAll("path")
+            .data(json.features)
+            .enter()
+            .append("path")
+            .attr("d", path)
+            .style("fill", 'steelblue')
+            .style( "opacity", 0.5)
+            .attr("stroke", "black")
+
+            //Bind data and create one path per GeoJSON feature
+          svg2.selectAll("path")
+              .data(json.features)
+              .enter()
+              .append("path")
+              .attr("d", path)
+              .style("fill", 'steelblue')
+              .style( "opacity", 0.5)
+              .attr("stroke", "black")
+
+            //Bind data and create one path per GeoJSON feature
+        svg4.selectAll("path")
+                .data(json.features)
+                .enter()
+                .append("path")
+                .attr("d", path)
+                .style("fill", 'steelblue')
+                .style( "opacity", 0.5)
+                .attr("stroke", "black")
+
+        //Bind data and create one path per GeoJSON feature
+        svg5.selectAll("path")
             .data(json.features)
             .enter()
             .append("path")
@@ -40,7 +94,154 @@ function bind() {
             .on("mouseout", mouseout)
             .on("click", click);
     });
+    setTimeout(myFunction, 500); // So dots overlay map
 }
+
+function myFunction(){
+
+  d3.csv("res/data/graphKm.csv", function(data) {
+
+				testData1 = data;
+				//console.log(testData1)
+
+        // Create points
+        svg1.selectAll("circle")
+            .data(testData1)
+            .enter()
+            .append("circle")
+            .attr("cx", function(d) {
+                return projection([d.LON, d.LAT])[0];
+            })
+            .attr("cy", function(d) {
+                return projection([d.LON, d.LAT])[1];
+            })
+            .attr("r", function(d) {
+                return 4;
+            })
+            .attr("stroke", function(d) {
+                return "black";
+
+            })
+            .style("fill", function(d) {
+                return color2[parseInt(d["k10"])];
+            })
+						.on("mouseover", function(d) {
+						 //Update the tooltip position and value
+							 d3.select("#tooltip5")
+							 .html("<br><strong><b>ZIP CODE: <b></strong>" + d.ZipCode + "<br><strong>CLUSTER: </strong>" + d.k10)})
+
+							.on("mouseout", function() {
+									 //Hide the tooltip
+									 d3.select("#tooltip5")
+									 .html("<br><strong><b>ZIP CODE: <b></strong>" + "<br><strong>CLUSTER: </strong>")
+								 });
+    });
+
+    d3.csv("res/data/graphInc.csv", function(data) {
+          testData2 = data;
+
+          // Create points
+          svg2.selectAll("circle")
+              .data(testData2)
+              .enter()
+              .append("circle")
+              .attr("cx", function(d) {
+                  return projection([d.LON, d.LAT])[0];
+              })
+              .attr("cy", function(d) {
+                  return projection([d.LON, d.LAT])[1];
+              })
+              .attr("r", function(d) {
+                  return 4;
+              })
+              .attr("stroke", function(d) {
+                  return "black";
+
+              })
+              .style("fill", function(d) {
+                  return color2[parseInt(d["k10"])];
+              })
+							.on("mouseover", function(d) {
+						   //Update the tooltip position and value
+						     d3.select("#tooltip5")
+						     .html("<br><strong><b>ZIP CODE: <b></strong>" + d.ZipCode + "<br><strong>CLUSTER: </strong>" + d.k10)})
+
+						    .on("mouseout", function() {
+						         //Hide the tooltip
+						         d3.select("#tooltip5")
+						         .html("<br><strong><b>ZIP CODE: <b></strong>" + "<br><strong>CLUSTER: </strong>")
+						       });
+      });
+
+
+			d3.csv("res/data/graphMove.csv", function(data) {
+	          testData4 = data;
+
+						// Set scales for each of the Specific complaints
+						rScale1 = d3.scale.linear()
+		            .domain([0, d3.max(data, function(d) {
+		                return d.Noise;
+		            })])
+		            .range([5, 20]);
+
+						rScale2 = d3.scale.linear()
+				          .domain([0, d3.max(data, function(d) {
+				            return d.Neighbourhood;
+				         })])
+				         .range([5, 20]);
+ 						rScale3 = d3.scale.linear()
+								 	.domain([0, d3.max(data, function(d) {
+								 		return d.Food;
+								 })])
+								 	.range([5, 20]);
+
+						rScale4 = d3.scale.linear()
+								 	.domain([0, d3.max(data, function(d) {
+								 			return d.Homeless;
+								 	})])
+								 		.range([5, 20]);
+
+						rScale5 = d3.scale.linear()
+								 	.domain([0, d3.max(data, function(d) {
+									 			return d.Sanitation;
+									 	})])
+								 		.range([5, 20]);
+
+	          // Create points
+	          svg4.selectAll("circle")
+	              .data(testData4)
+	              .enter()
+	              .append("circle")
+	              .attr("cx", function(d) {
+	                  return projection([d.LON, d.LAT])[0];
+										})
+	              .attr("cy", function(d) {
+	                  return projection([d.LON, d.LAT])[1];
+	              })
+	              .attr("r", function(d) {
+	                  return Math.sqrt(rScale1(d.Noise));
+	              })
+	              .attr("stroke", function(d) {
+	                  return "black";
+
+	              })
+	              .style("fill", function(d) {
+	                  return color2[4];
+									 //return 'blue';
+	              })
+								.on("mouseover", function(d) {
+							   //Update the tooltip position and value
+							     d3.select("#tooltip3")
+							     .html("<br><strong><b>ZIP CODE: <b></strong>" + d.ZipCode + "<br><strong>COMPLAINTS: </strong>" + d.Noise)})
+
+							 .on("mouseout", function() {
+							         //Hide the tooltip
+							    d3.select("#tooltip3").html("<br><strong><b>ZIP CODE: <b></strong>" + "<br><strong>COMPLAINTS: </strong>" );
+							       });
+
+	      });
+}
+
 
 function click(d) {
     console.log(this);
@@ -67,6 +268,119 @@ function findColor(d) {
     else if (d.properties.borough == "Manhattan") {
         return "#df9f9f";
     }
+}
+
+// If compare button pressed
+d3.selectAll(".comp")
+    .on("click", function() {
+        update(d3.select(this).attr("id"));
+    })
+
+	// If a specific complaint button pressed
+d3.selectAll(".spf")
+		 .on("click", function() {
+		     updateSPF(d3.select(this).attr("id"));
+		 })
+
+		 // Update Specific Complaint map
+		 function updateSPF(upSpf) {
+
+			 var first = document.getElementById(upSpf).innerHTML;
+			 d3.select('#spfText').html(first);
+
+		     svg4.selectAll("circle")
+		         .data(testData4)
+		         .transition()
+
+		         .attr("cx", function(d) {
+		             return projection([d.LON, d.LAT])[0];
+		         })
+		         .attr("cy", function(d) {
+		             return projection([d.LON, d.LAT])[1];
+		         })
+		         .attr("r", function(d) {
+
+								if(upSpf == 'spf1'){
+									return Math.sqrt(rScale1(d.Noise));
+								}else if(upSpf == 'spf2'){
+									return Math.sqrt(rScale2(d.Neighbourhood));
+								}else if(upSpf == 'spf3'){
+									return Math.sqrt(rScale3(d.Food));
+								}else if(upSpf == 'spf4'){
+									return Math.sqrt(rScale4(d.Homeless));
+								}else if(upSpf == 'spf5'){
+									return Math.sqrt(rScale5(d.Sanitation));
+								}
+								else{
+									return 3;
+								}
+
+		                     })
+		         .attr("stroke", function(d) {
+		                 return "black";
+		         })
+		         .style("fill", function(d) {
+							 if(upSpf == 'spf1'){
+								return 'yellow'
+							}else if(upSpf == 'spf2'){
+								return 'red'
+							}else if(upSpf == 'spf3'){
+								return 'pink'
+							}else if(upSpf == 'spf4'){
+								return 'brown'
+							}else if(upSpf == 'spf5'){
+								return 'Green'
+							}
+							else{
+								return colour2[5];
+							}
+		         });
+
+}
+
+// Update 311 and Income Cluster Map
+function update(update) {
+
+    svg1.selectAll("circle")
+        .data(testData1)
+        .transition()
+
+        .attr("cx", function(d) {
+            return projection([d.LON, d.LAT])[0];
+        })
+        .attr("cy", function(d) {
+            return projection([d.LON, d.LAT])[1];
+        })
+        .attr("r", function(d) {
+            return 4;
+                    })
+        .attr("stroke", function(d) {
+                return "black";
+        })
+        .style("fill", function(d) {
+            return color2[parseInt(d[update])];
+        });
+
+
+				svg2.selectAll("circle")
+		        .data(testData2)
+		        .transition()
+
+		        .attr("cx", function(d) {
+		            return projection([d.LON, d.LAT])[0];
+		        })
+		        .attr("cy", function(d) {
+		            return projection([d.LON, d.LAT])[1];
+		        })
+		        .attr("r", function(d) {
+		            return 4;
+		                    })
+		        .attr("stroke", function(d) {
+		                return "black";
+		        })
+		        .style("fill", function(d) {
+		            return color2[parseInt(d[update])];
+		        })
 }
 
 bind();
@@ -200,12 +514,27 @@ function heatMap(d) {
 }
 
 // Zooming functionality, http://mtaptich.github.io/d3-lessons/d3-maps/
+var zoom2 = d3.behavior.zoom()
+        .on("zoom",function() {
+            // Using d3 mouse events, dynamically update translation and scale.
+            svg4.selectAll("path").attr("transform","translate("+
+                d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+
+								svg4.selectAll("circle").attr("transform","translate("+
+		                d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+          //  console.log("Zooming")
+      });
+
 var zoom = d3.behavior.zoom()
         .on("zoom",function() {
             // Using d3 mouse events, dynamically update translation and scale.
-            svg2.selectAll("path").attr("transform","translate("+
+            svg5.selectAll("path").attr("transform","translate("+
                 d3.event.translate.join(",")+")scale("+d3.event.scale+")");
             console.log("Zooming")
       });
 
-svg2.call(zoom);
+svg5.call(zoom);
+svg4.call(zoom2);
+
+
+

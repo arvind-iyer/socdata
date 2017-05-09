@@ -9,8 +9,8 @@ function makeChart(dailyData) {
   var padding = 2;
   var w = Math.ceil(dailyData.length/7)*(cellSize+padding) + 5;
   var h = 7 * (cellSize + padding) + 30;
-  var div = d3.select("body").append("div").attr("id", "#calendar");
-  var svg = d3.select("div")
+  var div = d3.select("#timesheet");
+  var svg = div
   .append("svg")
   .attr("width", w)
   .attr("height", h);
@@ -41,7 +41,6 @@ function makeChart(dailyData) {
     tip.hide(d);
   });
 
-
   var tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
@@ -49,7 +48,6 @@ function makeChart(dailyData) {
     console.log(d, i, month);
     return "<div id='tooltip' style='width: 140px;'>Number of complaints on <strong>" +monthNames[month-1] + " " + (i+1) + "</strong>: <span style='color:red'>" + d + "</span></div>";
   });
-
 
     svg.call(tip);
 

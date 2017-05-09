@@ -1,6 +1,5 @@
 html {
     height: 100%;
-    width: 80%;
     margin: auto;
 }
 
@@ -15,10 +14,9 @@ body {
     background-image: url("../../res/nyc.jpg");
 
     /* Set a specific height */
-    min-height: 100%;;
+    min-height: 80%;;
 
     /* Create the parallax scrolling effect */
-
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -29,13 +27,12 @@ body {
 }
 
 #parallax-curtain{
-    height:50%;
     background:rgba(255,255,255,0.8);
     }
 
 .container {
-    width: 100%;
-    margin:auto;
+    padding-top: 50px;
+    width: 30%;
 }
 
 /* Turn off parallax scrolling for tablets and phones. Increase/decrease the pixels if needed */
@@ -61,6 +58,14 @@ body {
     display: none;
 }
 
-p b {
+b {
     letter-spacing: 1px;
+}
+
+#bar {
+    margin: auto;
+}
+
+p {
+    text-align: center;
 }

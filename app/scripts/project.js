@@ -441,6 +441,17 @@ function heatMap(d) {
 }
 
 // Zooming functionality, http://mtaptich.github.io/d3-lessons/d3-maps/
+var zoom2 = d3.behavior.zoom()
+        .on("zoom",function() {
+            // Using d3 mouse events, dynamically update translation and scale.
+            svg4.selectAll("path").attr("transform","translate("+
+                d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+
+								svg4.selectAll("circle").attr("transform","translate("+
+		                d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+          //  console.log("Zooming")
+      });
+
 var zoom = d3.behavior.zoom()
         .on("zoom",function() {
             // Using d3 mouse events, dynamically update translation and scale.
@@ -450,3 +461,7 @@ var zoom = d3.behavior.zoom()
       });
 
 svg5.call(zoom);
+svg4.call(zoom2);
+
+
+

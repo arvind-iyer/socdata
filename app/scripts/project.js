@@ -17,6 +17,7 @@ var svg2 = d3.select("#vis2")
 .append("svg")
 .attr("width", w2)
 .attr("height", h)
+    .attr("class", "map")
 .append("g");
 
 // Functions
@@ -42,6 +43,8 @@ function bind() {
 function click(d) {
     console.log(this);
     console.log(d.properties.borough);
+    d3.select("#bar").html("");
+    plotForZip(d.properties.postalCode);
 }
 
 // https://bl.ocks.org/john-guerra/43c7656821069d00dcbc

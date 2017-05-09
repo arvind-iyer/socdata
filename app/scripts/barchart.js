@@ -19,7 +19,7 @@ function plotChart(data) {
         .range([0, h]);
 
     var svg = d3.select("#bar").append("svg")
-        .attr("width", w).attr("height", H);
+        .attr("width", w).attr("height", H).attr("class", "bar");
 
     svg.selectAll("rect")
         .data(values)
@@ -53,14 +53,14 @@ function plotChart(data) {
             return Object.keys(data)[i+1];
         })
         .attr("font-size", 12)
-        .attr("font-family", "Open Sans")
+        .attr("font-family", "Open Sans");
 
     var tip = d3.tip()
         .attr('class', 'd3-tip')
         .offset([20, 0])
         .html(function(d) {
             return "<div id='tooltip'>Number of Complaints: " + d + "</div>";
-        })
+        });
     svg.call(tip);
 
     function mouseover(d, i) {
@@ -82,12 +82,11 @@ d3.csv("../res/data/graphMove.csv", function (csv) {
 
 });
 
-function plotForZip(zip, data) {
-    if(!data) {
-        data = csvData;
-    }
+function plotForZip(zip) {
+    data = csvData;
     for(var i = 0; i < data.length; i++) {
         if(data[i].ZipCode == zip) {
+            console.log(zip);
             plotChart(data[i]);
         }
     }

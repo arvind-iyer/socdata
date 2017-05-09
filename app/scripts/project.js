@@ -2,6 +2,9 @@
 var w2 = 600;
 var h = 500;
 var scale = ((w2-1) / 2 / Math.PI)
+var rScale;
+var color2 = ['pink', 'Brown', 'Red', 'Orange','Yellow', 'Green', 'Blue', 'Violet', 'Grey','black' ];
+
 
 //Define map projection
 var projection = d3.geo.mercator()
@@ -13,7 +16,28 @@ var path = d3.geo.path()
             .projection(projection);
 
 //Create SVG element
+var svg1 = d3.select("#vis1")
+.append("svg")
+.attr("width", w2)
+.attr("height", h)
+.append("g");
+
+//Create SVG element
 var svg2 = d3.select("#vis2")
+.append("svg")
+.attr("width", w2)
+.attr("height", h)
+.append("g");
+
+//Create SVG element
+var svg4 = d3.select("#vis4")
+.append("svg")
+.attr("width", 800)
+.attr("height", h)
+.append("g");
+
+//Create SVG element
+var svg5 = d3.select("#vis5")
 .append("svg")
 .attr("width", w2)
 .attr("height", h)
@@ -26,7 +50,37 @@ function bind() {
     d3.json("res/data/nyc.geojson", function(json) {
 
         //Bind data and create one path per GeoJSON feature
-        svg2.selectAll("path")
+        svg1.selectAll("path")
+            .data(json.features)
+            .enter()
+            .append("path")
+            .attr("d", path)
+            .style("fill", 'steelblue')
+            .style( "opacity", 0.5)
+            .attr("stroke", "black")
+
+            //Bind data and create one path per GeoJSON feature
+          svg2.selectAll("path")
+              .data(json.features)
+              .enter()
+              .append("path")
+              .attr("d", path)
+              .style("fill", 'steelblue')
+              .style( "opacity", 0.5)
+              .attr("stroke", "black")
+
+            //Bind data and create one path per GeoJSON feature
+        svg4.selectAll("path")
+                .data(json.features)
+                .enter()
+                .append("path")
+                .attr("d", path)
+                .style("fill", 'steelblue')
+                .style( "opacity", 0.5)
+                .attr("stroke", "black")
+
+        //Bind data and create one path per GeoJSON feature
+        svg5.selectAll("path")
             .data(json.features)
             .enter()
             .append("path")
@@ -130,9 +184,9 @@ function heatMap(d) {
 var zoom = d3.behavior.zoom()
         .on("zoom",function() {
             // Using d3 mouse events, dynamically update translation and scale.
-            svg2.selectAll("path").attr("transform","translate("+
+            svg5.selectAll("path").attr("transform","translate("+
                 d3.event.translate.join(",")+")scale("+d3.event.scale+")");
             console.log("Zooming")
       });
 
-svg2.call(zoom);
+svg5.call(zoom);

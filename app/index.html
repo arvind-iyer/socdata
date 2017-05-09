@@ -48,6 +48,67 @@
             <div id="tooltip2" class="hidden"></div>
 
             </div>
+
+            <div id="vis3"></div>
+        <div class="container">
+            <h2 id="kmean" align="center">Complaint Types Vs Income For Each Zip Code</h2>
+            <div class="col-xs-12 col-sm-12 col-md-12" align="center">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary button comp" id="k2">Click k2</button>
+                    <button type="button" class="btn btn-primary button comp" id="k3">Click k3</button>
+                    <button type="button" class="btn btn-primary button comp" id="k4">Click k4</button>
+                    <button type="button" class="btn btn-primary button comp" id="k5">Click k5</button>
+                    <button type="button" class="btn btn-primary button comp" id="k6">Click k6</button>
+                    <button type="button" class="btn btn-primary button comp" id="k7">Click k7</button>
+                    <button type="button" class="btn btn-primary button comp" id="k8">Click k8</button>
+                    <button type="button" class="btn btn-primary button comp" id="k9">Click k9</button>
+                    <button type="button" class="btn btn-primary button comp" id="k10">Click k10</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6" id="vis1">
+                    <h2 id="kmean1" align="center">311 Complaint Cluster</h2>
+                </div>
+                <div class="col-md-6" id="vis2">
+                    <h2 id="kmean2" align="center">Income Classification Cluster</h2>
+                </div>
+            </div>
+            <div id="tooltip5" align="center"><br><strong>ZIP CODE:</strong><br><strong>CLUSTER: </strong></div>
+        </div>
+        <h2 align="center">Income Classification Clustering</h2>
+        <p> After observing the k-means partitioning of the 311 data it was contemplated as to whether the distribution of the different 311 partitions and their complaint types had in any way an economic component, wherein people living in similar economic
+            areas experience the same types of complaints. A dataset of the average gross income for each zip-code was found. Unfortunately it was from 2014 the last year that the data had been collected. The dataset also has only 177 zip-codes contained
+            wihin. The data set had 6 different income brackets ranging from less than 25,000 up to 200,000+. Performing another k-means utilizing the zip-code and the income bracket and the results plotted as before. </p>
+
+        <h2 id="spf" align="center">Specific Complaints</h2>
+        <p>It was decided to further investigate some complaints and to form subsets out of similar complaints and then graph them across the zip-codes so as to make it easier to get an understanding of the type of complaints that could affect your quality
+            of life. The subsets are:
+            <br><b>Noise</b> complaints; it is comprised of complaints types 'Noise ', 'Noise - Vehicle', 'Noise - Residential', 'Noise - Street/Sidewalk', 'Noise - Commercial'.
+            <br><b>Neighbourhood</b> groups complaints about the upkeep of the area. It contains complaints about - 'Street Condition', 'Street Light Condition', 'Sweeping/Inadequate', 'Graffiti', and ‘Derelict Vehicle'.<br>
+            <b>Food</b> contains complaints about 'Food Poisoning' and 'Food Establishment'.<br>
+            <b>Homeless</b> contains complaints about 'Homeless Person Assistance' and 'Homeless Encampment'.
+            <br><b>Sanitation</b> contains complaints about 'Rodent', 'Dirty Conditions', 'Sanitation Condition', 'Sewer’, 'Overflowing Recycling Baskets', 'Missed Collection (All Materials)',’Unsanitary Conditions’. This is not a complete list and many
+            other complaints could be included but processing only the higher occurring complaints were taken. Select Subsets using the Buttons and the graph is zoomable for acloser inspection</p>
+        Each plot is has its own scale for that type so you can visualise the amount of the complaint across the city, but the plots should be be compared against each other size wise.
+        <br>
+        <br>
+        <div class="container">
+            <div class="col-xs-12 col-sm-12 col-md-12" align="center">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success button btn-lg spf" id="spf1">NOISE</button>
+                    <button type="button" class="btn btn-success btn-lg button spf" id="spf2">NEIGHBOURHOOD</button>
+                    <button type="button" class="btn btn-success btn-lg button spf" id="spf3">FOOD</button>
+                    <button type="button" class="btn btn-success btn-lg button spf" id="spf4">HOMELESS</button>
+                    <button type="button" class="btn btn-success btn-lg button spf" id="spf5">SANITATION</button>
+                </div>
+            </div>
+            <br>
+            <br>
+            <h2 id="spfText" align="center">NOISE</h2>
+            <div id="tooltip3" align="center"><br><strong>ZIP CODE:</strong><br><strong>COMPLAINTS: </strong></div>
+            <div class="col-md-12" id="vis4"></div>
+        </div>
         <!--------------------------------------------------------- Project part 2  ---------------------------------------------- -->
             <h2 align="center"><strong>Assignment 2B: Visualizing Geodata</strong></h2>
             <p align="left">Each point corresponds to a recorded <b><i>Prostitution</i></b> crime. A K-means clustering algorithm
@@ -71,7 +132,7 @@
                         <div id="tooltip2" class="hidden">
                         </div>
                     </div>
-                    <div class="col-xs-9 col-sm-9 col-md-9" id="vis2" align="center">
+                    <div class="col-xs-9 col-sm-9 col-md-9" id="vis5" align="center">
                         <span id="bar">
                         </span>
                     </div>

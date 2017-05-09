@@ -9,8 +9,8 @@ function makeChart(dailyData) {
   var padding = 2;
   var w = Math.ceil(dailyData.length/7)*(cellSize+padding) + 5;
   var h = 7 * (cellSize + padding) + 30;
-  var div = d3.select("body").append("div").attr("id", "#calendar");
-  var svg = d3.select("div")
+  var div = d3.select("#timesheet");
+  var svg = div
   .append("svg")
   .attr("width", w)
   .attr("height", h);

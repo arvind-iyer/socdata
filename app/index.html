@@ -23,36 +23,55 @@
 </head>
 
 <body>
-    <!------------------------------------------------------ Container For all Views ------------------------------------------------->
-  <!--  <div class="parallax"> -->
+  <div class="parallax">
     <div class="container">
-        <!----------------------------------------------------------- Project part 1 -------------------------------------------------------------->
-        <div id="parallax-curtain">
-            <h2 align="center"><strong>Final Project Using 311 New York City Dataset</strong></h2>
+        <div class="container">
 
-            <p>In the following visualizations the 311 open dataset from New York was utilised. This data was reduced down by zip-code, so that it only included the 240 zip-codes contained within New York City itself; discarding the zip-codes from New York
-            State. Although there are 240 zip-codes contained with the New York City limits the 311 data did not contain information on all of them. On researching it was found that some zip-codes are entirely contained within other zip-codes. These
-            larger zip-codes contain the data for both. For this reason the dataset contains 214 entries.</p>
+            <h2 align="center"><strong>Arvind</strong></h2>
+            <p align="left">This is the story about Arvind and his dream to move to New York. 
+                He has questions such as how he can spend his money wisely by investing in a place to live.
+                The Data Scientist David will be the one in charge of analyzing the different data sets in the story. 
+                Arvind has another request for David; He wants to live in a neighborhood considered good. 
+                David tells Arvind that he will figure things out and then come back to him. 
+                He is ready to do some data analysis and visualisation!
+                <br><br>
+                Arvind is first presented with a map by David. He decides to play around with it. 
+                <br>What happens if he clicks on it?
+                <br>He is then presented with total crimes in the city for each day in each money. Hopefully he won't be scared and change his mind about moving.
+                <div class="row">
+                    <div class="col-xs-3 col-md-3">
+                        <div id="tooltip2" class="hidden">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2" id="vis5" align="center">
+                    </div>
+                </div>
+                <center><span id="bar"></span></center>
+            </div>
+    </div>
+    <div class="container">
+    <div id="timesheet"></div>
+    </div>
+    <div class="container">
+            <h2 align="center"><strong>Complaint Types Vs Income For Each Zip Code</strong></h2>
 
-            <h2 align="center"><strong>Complaint Types Clustering</strong></h2>
-
-            <p>In the first visualisation a k-means algorithm was applied to the 311, 2016 dataset with respect to the ‘Complaint Types’ which were assigned a numeric value and the ‘Incident Zip’ of the complaint. K-means is an unsupervised learning algorithm
-            which seeks to partition the observations into k clusters based on the nearest mean. This algorithm was run with a k values of 2-10 and the output values stored. All duplicates from the output dataset were removed leaving only one instance
-            of each zip-code with its corresponding cluster number. Unfortunately when it came to plot the visualisation a geojson file for the New York zip codes could not be found. Other New York geojson were available and so it was decided to use
-            a neighbourhood geojson with the zip-codes plotted as points at their appropriate latitude and longitude.</p>
+            <p>David is such a smart man. He figures out that he should make groups or clusters of neighborhoods with the similar types of complaints.
+                He is then comparing this with groups of neighborhoods with the same level of income. <br>
+                Birds of a feather flock together, right? <br>
+                David gives Arvind several options in case he wants to see how the areas can be divided into 2, 3 or maybe 10?
+                He decides to give Arvind another thing to test. What kind of cluster will Arvind join?
+            </p>
 
             </div>
             <div id="tooltip" class="hidden">
             </div>
             <div class="row">
-            <!-- <img id="pics" style.visibility="false" class="image" width="100%" height="100%" src="minPics/k2.PNG" /> -->
             <div id="tooltip2" class="hidden"></div>
-
             </div>
 
             <div id="vis3"></div>
         <div class="container">
-            <h2 id="kmean" align="center">Complaint Types Vs Income For Each Zip Code</h2>
+            <h2 id="kmean" align="center">Click on the buttons!</h2>
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
                 <div class="btn-group">
                     <button type="button" class="btn btn-primary button comp" id="k2">Click k2</button>
@@ -66,7 +85,7 @@
                     <button type="button" class="btn btn-primary button comp" id="k10">Click k10</button>
                 </div>
             </div>
-
+            <br>
             <div class="row">
                 <div class="col-md-6" id="vis1">
                     <h2 id="kmean1" align="center">311 Complaint Cluster</h2>
@@ -77,71 +96,36 @@
             </div>
             <div id="tooltip5" align="center"><br><strong>ZIP CODE:</strong><br><strong>CLUSTER: </strong></div>
         </div>
-        <h2 align="center">Income Classification Clustering</h2>
-        <p> After observing the k-means partitioning of the 311 data it was contemplated as to whether the distribution of the different 311 partitions and their complaint types had in any way an economic component, wherein people living in similar economic
-            areas experience the same types of complaints. A dataset of the average gross income for each zip-code was found. Unfortunately it was from 2014 the last year that the data had been collected. The dataset also has only 177 zip-codes contained
-            wihin. The data set had 6 different income brackets ranging from less than 25,000 up to 200,000+. Performing another k-means utilizing the zip-code and the income bracket and the results plotted as before. </p>
-
-        <h2 id="spf" align="center">Specific Complaints</h2>
-        <p>It was decided to further investigate some complaints and to form subsets out of similar complaints and then graph them across the zip-codes so as to make it easier to get an understanding of the type of complaints that could affect your quality
-            of life. The subsets are:
-            <br><b>Noise</b> complaints; it is comprised of complaints types 'Noise ', 'Noise - Vehicle', 'Noise - Residential', 'Noise - Street/Sidewalk', 'Noise - Commercial'.
-            <br><b>Neighbourhood</b> groups complaints about the upkeep of the area. It contains complaints about - 'Street Condition', 'Street Light Condition', 'Sweeping/Inadequate', 'Graffiti', and ‘Derelict Vehicle'.<br>
-            <b>Food</b> contains complaints about 'Food Poisoning' and 'Food Establishment'.<br>
-            <b>Homeless</b> contains complaints about 'Homeless Person Assistance' and 'Homeless Encampment'.
-            <br><b>Sanitation</b> contains complaints about 'Rodent', 'Dirty Conditions', 'Sanitation Condition', 'Sewer’, 'Overflowing Recycling Baskets', 'Missed Collection (All Materials)',’Unsanitary Conditions’. This is not a complete list and many
-            other complaints could be included but processing only the higher occurring complaints were taken. Select Subsets using the Buttons and the graph is zoomable for acloser inspection</p>
-        Each plot is has its own scale for that type so you can visualise the amount of the complaint across the city, but the plots should be be compared against each other size wise.
-        <br>
-        <br>
         <div class="container">
-            <div class="col-xs-12 col-sm-12 col-md-12" align="center">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-success button btn-lg spf" id="spf1">NOISE</button>
-                    <button type="button" class="btn btn-success btn-lg button spf" id="spf2">NEIGHBOURHOOD</button>
-                    <button type="button" class="btn btn-success btn-lg button spf" id="spf3">FOOD</button>
-                    <button type="button" class="btn btn-success btn-lg button spf" id="spf4">HOMELESS</button>
-                    <button type="button" class="btn btn-success btn-lg button spf" id="spf5">SANITATION</button>
-                </div>
-            </div>
-            <br>
-            <br>
-            <h2 id="spfText" align="center">NOISE</h2>
-            <div id="tooltip3" align="center"><br><strong>ZIP CODE:</strong><br><strong>COMPLAINTS: </strong></div>
-            <div class="col-md-12" id="vis4"></div>
-        </div>
-        <!--------------------------------------------------------- Project part 2  ---------------------------------------------- -->
-            <h2 align="center"><strong>Assignment 2B: Visualizing Geodata</strong></h2>
-            <p align="left">Each point corresponds to a recorded <b><i>Prostitution</i></b> crime. A K-means clustering algorithm
-            is used to determine the cluster centers for Prostitution crime. Different values of K are tried form 2-6. Displayed below
-            is a map of the city showing the different police districts with the prostitution crime points overlayed. The colour of the points
-            correspond to the cluster center for that area denoted by a bigger circle of the same colour outlined in black. The value of
-            K can be changed by pressing on one of the 5 buttons K2-K6. A preview is displayed when hovering over the button. When hovering over
-            a point on the map, its Lat and Lon will be displayed.
-                <!-- <div class="btn col-xs-12 col-sm-12 col-md-12" align="center">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary button" id="k2">Click k2</button>
-                        <button type="button" class="btn btn-primary button" id="k3">Click k3</button>
-                        <button type="button" class="btn btn-primary button" id="k4">Click k4</button>
-                        <button type="button" class="btn btn-primary button" id="k5">Click k5</button>
-                        <button type="button" class="btn btn-primary button" id="k6">Click k6</button>
-                    </div>
-                </div> -->
-                <div class="row">
-                    <div class="col-xs-3 col-md-3">
-                        <!-- <img id="pics" style.visibility="false" class="image" width="100%" height="100%" src="minPics/k2.PNG" /> -->
-                        <div id="tooltip2" class="hidden">
-                        </div>
-                    </div>
-                    <div class="col-xs-9 col-sm-9 col-md-9" id="vis5" align="center">
-                        <span id="bar">
-                        </span>
-                    </div>
-                </div>
-            </div>
 
+            <h2 id="spf" align="center">Specific Complaints</h2>
+            <p>Arvind calls David up and says that he has been thinking about something; He really doesn't like noise and he likes it clean. 
+                <br>He wants the neighborhood to be decent, the streets should be in a good condition and there should not be a lot of homeless people.
+                <br>He also loved eating out, so the problems around the area should not be known for bad incidents. 
+                <br>Lastly he is very clean and the sanitation of an area should be good!
+                <br>As always David will fix whatever Arvind is looking for.
+            <br>
+            <br>
+            <div class="container">
+                <div class="col-xs-12 col-sm-12 col-md-12" align="center">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success button btn-lg spf" id="spf1">NOISE</button>
+                        <button type="button" class="btn btn-success btn-lg button spf" id="spf2">NEIGHBOURHOOD</button>
+                        <button type="button" class="btn btn-success btn-lg button spf" id="spf3">FOOD</button>
+                        <button type="button" class="btn btn-success btn-lg button spf" id="spf4">HOMELESS</button>
+                        <button type="button" class="btn btn-success btn-lg button spf" id="spf5">SANITATION</button>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <h2 id="spfText" align="center">NOISE</h2>
+                <div id="tooltip3" align="center"><br><strong>ZIP CODE:</strong><br><strong>COMPLAINTS: </strong></div>
+                <center><div class="col-md-12" id="vis4"></div></center>
+            </div>
+        </div>
+            
     </div>
     <script type="text/javascript" src="scripts/project.js"></script>
-
+</div>
 </body>
 </html>

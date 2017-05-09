@@ -37,7 +37,7 @@ function plotChart(data) {
         .attr("height", function(d) {
             return yScale(d);
         })
-        .attr("fill", "steelblue")
+        .attr("fill", "#ff8000")
         .on("mouseover", mouseover)
         .on("mouseout", mouseout);;
 
@@ -69,11 +69,11 @@ function plotChart(data) {
         tip.show(d,i);
         d3.select(this)
             .transition().duration(400)
-            .attr("fill", "teal");
+            .attr("fill", "#df9f9f");
     }
     function mouseout(d, i) {
         tip.hide(d, i);
-        d3.select(this).transition().attr("fill", "steelblue");
+        d3.select(this).transition().attr("fill", "#ff3300");
     }
 
 }

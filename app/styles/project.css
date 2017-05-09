@@ -69,3 +69,7 @@ b {
 p {
     text-align: center;
 }
+
+btn btn-primary button comp {
+    color: "orange";
+}

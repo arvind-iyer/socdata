@@ -455,10 +455,12 @@ function closest(pos) {
         .duration(2000)
         .delay(1000)
         .attr("opacity", 0);
+
     d3.select(".text")
         .attr("x", 10)
-        .attr("y", 30)
-        .text("Probable complaint: " +  knnJSON.category[j]);
+        .attr("y", 70)
+        .text("Probable complaint: " +  knnJSON.category[j])
+        .style("font-weight", "bold");
 
      return j;
 }

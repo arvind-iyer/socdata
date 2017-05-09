@@ -22,7 +22,7 @@ var svg2 = d3.select("#vis2")
 // Functions
 function bind() {
 
-    d3.json("../res/data/nyc.geojson", function(json) {
+    d3.json("res/data/nyc.geojson", function(json) {
 
         //Bind data and create one path per GeoJSON feature
         svg2.selectAll("path")

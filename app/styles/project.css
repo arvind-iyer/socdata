@@ -1,5 +1,5 @@
 html {
-    height: 100%;
+    height: 90%;
     margin: auto;
 }
 
@@ -32,11 +32,10 @@ body {
 
 .container {
     padding-top: 50px;
-    width: 30%;
 }
 
 /* Turn off parallax scrolling for tablets and phones. Increase/decrease the pixels if needed */
-@media only screen and (max-device-width: 1024px) {
+@media only screen and (max-device-width: 780px) {
     .parallax {
         background-attachment: scroll;
     }
@@ -68,8 +67,13 @@ b {
 
 p {
     text-align: center;
+    margin: auto;
 }
 
 btn btn-primary button comp {
     color: "orange";
+}
+
+h2 {
+    letter-spacing: 3.5px;
 }

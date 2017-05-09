@@ -44,7 +44,7 @@ var svg5 = d3.select("#vis5")
     .attr("class", "map")
 .append("g");
 
-svg2.append("text").attr("class", "text");
+svg5.append("text").attr("class", "text");
 
 // Functions
 function bind() {

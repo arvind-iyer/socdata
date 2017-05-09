@@ -268,6 +268,119 @@ function findColor(d) {
     }
 }
 
+// If compare button pressed
+d3.selectAll(".comp")
+    .on("click", function() {
+        update(d3.select(this).attr("id"));
+    })
+
+	// If a specific complaint button pressed
+d3.selectAll(".spf")
+		 .on("click", function() {
+		     updateSPF(d3.select(this).attr("id"));
+		 })
+
+		 // Update Specific Complaint map
+		 function updateSPF(upSpf) {
+
+			 var first = document.getElementById(upSpf).innerHTML;
+			 d3.select('#spfText').html(first);
+
+		     svg4.selectAll("circle")
+		         .data(testData4)
+		         .transition()
+
+		         .attr("cx", function(d) {
+		             return projection([d.LON, d.LAT])[0];
+		         })
+		         .attr("cy", function(d) {
+		             return projection([d.LON, d.LAT])[1];
+		         })
+		         .attr("r", function(d) {
+
+								if(upSpf == 'spf1'){
+									return Math.sqrt(rScale1(d.Noise));
+								}else if(upSpf == 'spf2'){
+									return Math.sqrt(rScale2(d.Neighbourhood));
+								}else if(upSpf == 'spf3'){
+									return Math.sqrt(rScale3(d.Food));
+								}else if(upSpf == 'spf4'){
+									return Math.sqrt(rScale4(d.Homeless));
+								}else if(upSpf == 'spf5'){
+									return Math.sqrt(rScale5(d.Sanitation));
+								}
+								else{
+									return 3;
+								}
+
+		                     })
+		         .attr("stroke", function(d) {
+		                 return "black";
+		         })
+		         .style("fill", function(d) {
+							 if(upSpf == 'spf1'){
+								return 'yellow'
+							}else if(upSpf == 'spf2'){
+								return 'red'
+							}else if(upSpf == 'spf3'){
+								return 'pink'
+							}else if(upSpf == 'spf4'){
+								return 'brown'
+							}else if(upSpf == 'spf5'){
+								return 'Green'
+							}
+							else{
+								return colour2[5];
+							}
+		         });
+
+}
+
+// Update 311 and Income Cluster Map
+function update(update) {
+
+    svg1.selectAll("circle")
+        .data(testData1)
+        .transition()
+
+        .attr("cx", function(d) {
+            return projection([d.LON, d.LAT])[0];
+        })
+        .attr("cy", function(d) {
+            return projection([d.LON, d.LAT])[1];
+        })
+        .attr("r", function(d) {
+            return 4;
+                    })
+        .attr("stroke", function(d) {
+                return "black";
+        })
+        .style("fill", function(d) {
+            return color2[parseInt(d[update])];
+        });
+
+
+				svg2.selectAll("circle")
+		        .data(testData2)
+		        .transition()
+
+		        .attr("cx", function(d) {
+		            return projection([d.LON, d.LAT])[0];
+		        })
+		        .attr("cy", function(d) {
+		            return projection([d.LON, d.LAT])[1];
+		        })
+		        .attr("r", function(d) {
+		            return 4;
+		                    })
+		        .attr("stroke", function(d) {
+		                return "black";
+		        })
+		        .style("fill", function(d) {
+		            return color2[parseInt(d[update])];
+		        })
+}
+
 bind();
 
 function mouseover(d){

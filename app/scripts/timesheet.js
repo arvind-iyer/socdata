@@ -41,7 +41,6 @@ function makeChart(dailyData) {
     tip.hide(d);
   });
 
-
   var tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
@@ -49,7 +48,6 @@ function makeChart(dailyData) {
     console.log(d, i, month);
     return "<div id='tooltip' style='width: 140px;'>Number of complaints on <strong>" +monthNames[month-1] + " " + (i+1) + "</strong>: <span style='color:red'>" + d + "</span></div>";
   });
-
 
     svg.call(tip);
 

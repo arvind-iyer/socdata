@@ -31,7 +31,7 @@ function bind() {
             .append("path")
             .attr("d", path)
             .style("fill", findColor)
-            .style( "opacity", 0.5)
+            .style("opacity", heatMap)
             .attr("stroke", "black")
             .on("mouseover", mouseover)
             .on("mouseout", mouseout)
@@ -41,13 +41,12 @@ function bind() {
 
 function click(d) {
     console.log(this);
-    console.log(d.properties.neighborhood);
     console.log(d.properties.borough);
 }
 
 // https://bl.ocks.org/john-guerra/43c7656821069d00dcbc
 function findColor(d) {
-    console.log(d);
+    //console.log(d);
     if (d.properties.borough == "Queens") {
         return "#800000";
     }
@@ -74,15 +73,54 @@ function mouseover(d){
                     .style("left", (d3.event.pageX + 30) + "px")
                     .style("top", (d3.event.pageY + 10) + "px")
                     .style("opacity", 1)
-                    .html("<center><b><u>"+ d.properties.borough + "</b></u><br>" + d.properties.neighborhood)
+                    .html("<center><b><u>"+ d.properties.borough + "</b></u><br>" + d.properties.PO_NAME
+                          + "<br> Zip code: " + d.properties.postalCode);
+
     d3.select("#tooltip")
                     .classed("hidden", false);
+
+    console.log("Zip code: " + d.properties.postalCode)
 }
 
 function mouseout(d) {
     d3.select(this).style('fill', findColor)
     d3.select("#tooltip")
                     .classed("hidden", true);
+}
+
+// Read file for three types of complaint categories
+var graphMove;
+
+d3.csv("../res/data/graphMove.csv", function(data) {
+    graphMove = data;
+})
+
+// Scaling
+var xScale = d3.scale.pow().exponent(0.65)
+                .domain([0, 17224.0])
+                .range([0, 1]);
+
+// Opacity
+function heatMap(d) {
+
+    var totalSum = 1132525;
+    var sanitationSum = 303740;
+    var foodSum = 17061;
+    var homelessSum = 56265;
+    var neighborhoodSum = 241805;
+    var noiseSum = 513654;
+    var opacity;
+        
+    for (i = 0; i < graphMove.length; i++) { 
+        if (d.properties.postalCode == graphMove[i].ZipCode) {
+            totalForThisInstance = parseFloat(graphMove[i].Sanitation)+parseFloat(graphMove[i].Food)+parseFloat(graphMove[i].Homeless)+parseFloat(graphMove[i].Noise)+parseFloat(graphMove[i].Neighbourhood);
+            opacity = xScale(totalForThisInstance);
+            console.log(opacity)
+        } 
+    }
+    if(opacity > 1)
+        opacity = 1;
+    return opacity;
 }
 
 // Zooming functionality, http://mtaptich.github.io/d3-lessons/d3-maps/

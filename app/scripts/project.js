@@ -20,6 +20,8 @@ var svg2 = d3.select("#vis2")
     .attr("class", "map")
 .append("g");
 
+svg2.append("text").attr("class", "text");
+
 // Functions
 function bind() {
 
@@ -97,11 +99,82 @@ var graphMove;
 d3.csv("../res/data/graphMove.csv", function(data) {
     graphMove = data;
 })
+var cScale = d3.scale.category20();
 
 // Scaling
 var xScale = d3.scale.pow().exponent(0.65)
                 .domain([0, 17224.0])
                 .range([0, 1]);
+var knnJSON;
+function closest(pos) {
+    [pos[0], pos[1]] = [pos[1], pos[0]];
+    var curr = [knnJSON.lat[0], knnJSON.lon[0]];
+    var j = 0;
+    for(var i = 0; i < knnJSON.lat.length; i++) {
+        var lat = knnJSON.lat[i];
+        var lon = knnJSON.lon[i];
+        if(pos[0] >= lat || pos[1] >= lon) {
+            curr[0] = lat;
+            curr[1] = lon;
+            j = i;
+        } else {
+            break;
+        }
+    }
+    console.log(pos, curr);
+
+    var svg = d3.select(".map")
+        .append("circle")
+        .attr("cx", function () {
+            return projection([curr[1], curr[0]])[0];
+        })
+        .attr("cy", function () {
+            return projection([curr[1], curr[0]])[1];
+        })
+        .attr("r", 5)
+        .attr("fill", function (d) {
+            console.log(knnJSON.category[j]);
+            return cScale(knnJSON.cat[j]);
+        })
+        .attr("opacity", 1)
+        .transition()
+        .duration(2000)
+        .delay(1000)
+        .attr("opacity", 0);
+    d3.select(".text")
+        .attr("x", 10)
+        .attr("y", 30)
+        .text("Probable complaint: " +  knnJSON.category[j]);
+
+     return j;
+}
+
+d3.json("../res/data/predicted-complaints.json", function (json) {
+    knnJSON = json;
+   var svg = d3.select(".map")
+        .on("click", function () {
+            var index = closest(projection.invert(d3.mouse(this)));
+            console.log("index", index);
+        })
+
+   //  for(var i = 0; i < json.lon.length; i++) {
+   //     var svg = d3.select(".map")
+   //         .append("circle")
+   //         .attr("cx", function () {
+   //             return projection([json.lon[i], json.lat[i]])[0];
+   //         })
+   //         .attr("cy", function () {
+   //             return projection([json.lon[i], json.lat[i]])[1];
+   //         })
+   //         .attr("r", 0)
+   //         .attr("fill", function (d) {
+   //             return cScale(json.cat[i]);
+   //         })
+   //         .attr("opacity", 0);
+   // }
+});
+
+
 
 // Opacity
 function heatMap(d) {

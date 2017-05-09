@@ -32,7 +32,7 @@ function makeChart(dailyData) {
     colourScale = d3.scale.sqrt()
     .domain([0, d3.max(dailyData)])
     .interpolate(d3.interpolateHcl)
-    .range([d3.rgb("#12036b"), d3.rgb('#d4f9e8')]);
+    .range([d3.rgb("#ffffe6"), d3.rgb('#ff3300')]);
     return colourScale(d);
 
   }).on('mouseover', function(d, i) {

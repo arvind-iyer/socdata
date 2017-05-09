@@ -92,7 +92,154 @@ function bind() {
             .on("mouseout", mouseout)
             .on("click", click);
     });
+    setTimeout(myFunction, 500); // So dots overlay map
 }
+
+function myFunction(){
+
+  d3.csv("res/data/graphKm.csv", function(data) {
+
+				testData1 = data;
+				//console.log(testData1)
+
+        // Create points
+        svg1.selectAll("circle")
+            .data(testData1)
+            .enter()
+            .append("circle")
+            .attr("cx", function(d) {
+                return projection([d.LON, d.LAT])[0];
+            })
+            .attr("cy", function(d) {
+                return projection([d.LON, d.LAT])[1];
+            })
+            .attr("r", function(d) {
+                return 4;
+            })
+            .attr("stroke", function(d) {
+                return "black";
+
+            })
+            .style("fill", function(d) {
+                return color2[parseInt(d["k10"])];
+            })
+						.on("mouseover", function(d) {
+						 //Update the tooltip position and value
+							 d3.select("#tooltip5")
+							 .html("<br><strong><b>ZIP CODE: <b></strong>" + d.ZipCode + "<br><strong>CLUSTER: </strong>" + d.k10)})
+
+							.on("mouseout", function() {
+									 //Hide the tooltip
+									 d3.select("#tooltip5")
+									 .html("<br><strong><b>ZIP CODE: <b></strong>" + "<br><strong>CLUSTER: </strong>")
+								 });
+    });
+
+    d3.csv("res/data/graphInc.csv", function(data) {
+          testData2 = data;
+
+          // Create points
+          svg2.selectAll("circle")
+              .data(testData2)
+              .enter()
+              .append("circle")
+              .attr("cx", function(d) {
+                  return projection([d.LON, d.LAT])[0];
+              })
+              .attr("cy", function(d) {
+                  return projection([d.LON, d.LAT])[1];
+              })
+              .attr("r", function(d) {
+                  return 4;
+              })
+              .attr("stroke", function(d) {
+                  return "black";
+
+              })
+              .style("fill", function(d) {
+                  return color2[parseInt(d["k10"])];
+              })
+							.on("mouseover", function(d) {
+						   //Update the tooltip position and value
+						     d3.select("#tooltip5")
+						     .html("<br><strong><b>ZIP CODE: <b></strong>" + d.ZipCode + "<br><strong>CLUSTER: </strong>" + d.k10)})
+
+						    .on("mouseout", function() {
+						         //Hide the tooltip
+						         d3.select("#tooltip5")
+						         .html("<br><strong><b>ZIP CODE: <b></strong>" + "<br><strong>CLUSTER: </strong>")
+						       });
+      });
+
+
+			d3.csv("res/data/graphMove.csv", function(data) {
+	          testData4 = data;
+
+						// Set scales for each of the Specific complaints
+						rScale1 = d3.scale.linear()
+		            .domain([0, d3.max(data, function(d) {
+		                return d.Noise;
+		            })])
+		            .range([5, 20]);
+
+						rScale2 = d3.scale.linear()
+				          .domain([0, d3.max(data, function(d) {
+				            return d.Neighbourhood;
+				         })])
+				         .range([5, 20]);
+ 						rScale3 = d3.scale.linear()
+								 	.domain([0, d3.max(data, function(d) {
+								 		return d.Food;
+								 })])
+								 	.range([5, 20]);
+
+						rScale4 = d3.scale.linear()
+								 	.domain([0, d3.max(data, function(d) {
+								 			return d.Homeless;
+								 	})])
+								 		.range([5, 20]);
+
+						rScale5 = d3.scale.linear()
+								 	.domain([0, d3.max(data, function(d) {
+									 			return d.Sanitation;
+									 	})])
+								 		.range([5, 20]);
+
+	          // Create points
+	          svg4.selectAll("circle")
+	              .data(testData4)
+	              .enter()
+	              .append("circle")
+	              .attr("cx", function(d) {
+	                  return projection([d.LON, d.LAT])[0];
+										})
+	              .attr("cy", function(d) {
+	                  return projection([d.LON, d.LAT])[1];
+	              })
+	              .attr("r", function(d) {
+	                  return Math.sqrt(rScale1(d.Noise));
+	              })
+	              .attr("stroke", function(d) {
+	                  return "black";
+
+	              })
+	              .style("fill", function(d) {
+	                  return color2[4];
+									 //return 'blue';
+	              })
+								.on("mouseover", function(d) {
+							   //Update the tooltip position and value
+							     d3.select("#tooltip3")
+							     .html("<br><strong><b>ZIP CODE: <b></strong>" + d.ZipCode + "<br><strong>COMPLAINTS: </strong>" + d.Noise)})
+
+							 .on("mouseout", function() {
+							         //Hide the tooltip
+							    d3.select("#tooltip3").html("<br><strong><b>ZIP CODE: <b></strong>" + "<br><strong>COMPLAINTS: </strong>" );
+							       });
+
+	      });
+}
+
 
 function click(d) {
     console.log(this);
